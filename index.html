@@ -1,0 +1,1000 @@
+<title>Francis Chung · Portfolio</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+
+<style>
+/* Design Tokens */
+:root {
+  /* Layout: Asymmetric grid with floating project cards and dynamic depth layers */
+
+  /* Colors: Deep technical palette with electric accents */
+  --bg-primary: #0a0e14;
+  --bg-secondary: #141922;
+  --bg-tertiary: #1c2330;
+  --text-primary: #e6e8eb;
+  --text-secondary: #9da5b4;
+  --text-muted: #5c6773;
+  --accent-electric: #00d9ff;
+  --accent-glow: rgba(0, 217, 255, 0.15);
+  --accent-neon: #7c3aed;
+  --rust: #f74c00;
+  --success: #39d98a;
+  --border: rgba(157, 165, 180, 0.12);
+
+  /* Typography */
+  --font-display: 'Space Grotesk', system-ui, sans-serif;
+  --font-body: 'Inter', system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', 'Courier New', monospace;
+
+  color-scheme: dark;
+}
+
+@media (prefers-color-scheme: light) {
+  :root:not([data-theme="dark"]) {
+    --bg-primary: #ffffff;
+    --bg-secondary: #f8f9fa;
+    --bg-tertiary: #e9ecef;
+    --text-primary: #1a1d23;
+    --text-secondary: #4a5568;
+    --text-muted: #718096;
+    --accent-electric: #0066cc;
+    --accent-glow: rgba(0, 102, 204, 0.08);
+    --accent-neon: #6d28d9;
+    --rust: #dc2626;
+    --success: #059669;
+    --border: rgba(0, 0, 0, 0.08);
+
+    color-scheme: light;
+  }
+}
+
+:root[data-theme="light"] {
+  --bg-primary: #ffffff;
+  --bg-secondary: #f8f9fa;
+  --bg-tertiary: #e9ecef;
+  --text-primary: #1a1d23;
+  --text-secondary: #4a5568;
+  --text-muted: #718096;
+  --accent-electric: #0066cc;
+  --accent-glow: rgba(0, 102, 204, 0.08);
+  --accent-neon: #6d28d9;
+  --rust: #dc2626;
+  --success: #059669;
+  --border: rgba(0, 0, 0, 0.08);
+
+  color-scheme: light;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-body);
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  line-height: 1.6;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+  overflow-x: hidden;
+}
+
+/* Hero Section */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  padding-block: 4rem 2rem;
+  text-align: center;
+}
+
+.hero-background {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  opacity: 0.4;
+  pointer-events: none;
+}
+
+.grid-overlay {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(var(--border) 1px, transparent 1px),
+    linear-gradient(90deg, var(--border) 1px, transparent 1px);
+  background-size: 50px 50px;
+  animation: gridMove 20s linear infinite;
+}
+
+@keyframes gridMove {
+  0% { transform: translate(0, 0); }
+  100% { transform: translate(50px, 50px); }
+}
+
+.hero-content {
+  position: relative;
+  z-index: 1;
+  max-width: 900px;
+}
+
+.eyebrow {
+  font-family: var(--font-mono);
+  font-size: 0.875rem;
+  color: var(--accent-electric);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-bottom: 1.5rem;
+  font-weight: 500;
+}
+
+h1 {
+  font-family: var(--font-display);
+  font-size: clamp(2.5rem, 8vw, 5rem);
+  font-weight: 700;
+  line-height: 1.1;
+  margin-bottom: 1.5rem;
+  text-wrap: balance;
+  background: linear-gradient(135deg, var(--text-primary), var(--accent-electric));
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.subtitle {
+  font-size: clamp(1.125rem, 2.5vw, 1.5rem);
+  color: var(--text-secondary);
+  margin-bottom: 3rem;
+  max-width: 700px;
+  margin-left: auto;
+  margin-right: auto;
+  text-wrap: balance;
+}
+
+.cta-group {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-bottom: 4rem;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 1rem 2rem;
+  font-family: var(--font-display);
+  font-size: 1rem;
+  font-weight: 600;
+  text-decoration: none;
+  border-radius: 0.5rem;
+  transition: all 0.3s ease;
+  border: 2px solid transparent;
+}
+
+.btn-primary {
+  background: var(--accent-electric);
+  color: var(--bg-primary);
+  box-shadow: 0 0 20px var(--accent-glow);
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 0 30px var(--accent-glow);
+}
+
+.btn-secondary {
+  background: transparent;
+  color: var(--text-primary);
+  border-color: var(--border);
+}
+
+.btn-secondary:hover {
+  border-color: var(--accent-electric);
+  background: var(--accent-glow);
+}
+
+.stats {
+  display: flex;
+  gap: 3rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.stat {
+  text-align: center;
+}
+
+.stat-value {
+  font-family: var(--font-display);
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: var(--accent-electric);
+  display: block;
+  font-variant-numeric: tabular-nums;
+}
+
+.stat-label {
+  font-size: 0.875rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+/* Section */
+.section {
+  padding-block: 5rem;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.section-header {
+  text-align: center;
+  margin-bottom: 4rem;
+}
+
+.section-title {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 5vw, 3rem);
+  font-weight: 700;
+  margin-bottom: 1rem;
+}
+
+.section-subtitle {
+  font-size: 1.125rem;
+  color: var(--text-secondary);
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+/* Filter Tabs */
+.filter-tabs {
+  display: flex;
+  gap: 0.5rem;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-bottom: 3rem;
+}
+
+.filter-tab {
+  padding: 0.75rem 1.5rem;
+  font-family: var(--font-mono);
+  font-size: 0.875rem;
+  background: transparent;
+  color: var(--text-secondary);
+  border: 1px solid var(--border);
+  border-radius: 2rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-transform: lowercase;
+}
+
+.filter-tab:hover {
+  border-color: var(--accent-electric);
+  color: var(--accent-electric);
+}
+
+.filter-tab.active {
+  background: var(--accent-electric);
+  color: var(--bg-primary);
+  border-color: var(--accent-electric);
+}
+
+/* Projects Grid */
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 380px), 1fr));
+  gap: 2rem;
+  margin-bottom: 3rem;
+}
+
+.project-card {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border);
+  border-radius: 1rem;
+  padding: 2rem;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.project-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--accent-electric), var(--accent-neon));
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.project-card:hover {
+  transform: translateY(-4px);
+  border-color: var(--accent-electric);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+}
+
+.project-card:hover::before {
+  opacity: 1;
+}
+
+.project-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: start;
+  margin-bottom: 1rem;
+  gap: 1rem;
+}
+
+.project-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 0.75rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  background: var(--accent-glow);
+  flex-shrink: 0;
+}
+
+.project-links {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.icon-link {
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0.5rem;
+  background: var(--bg-tertiary);
+  color: var(--text-secondary);
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+.icon-link:hover {
+  background: var(--accent-electric);
+  color: var(--bg-primary);
+  transform: scale(1.1);
+}
+
+.project-title {
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 0.75rem;
+  color: var(--text-primary);
+}
+
+.project-description {
+  color: var(--text-secondary);
+  margin-bottom: 1.5rem;
+  line-height: 1.6;
+  flex-grow: 1;
+}
+
+.project-tags {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  margin-bottom: 1rem;
+}
+
+.tag {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  padding: 0.25rem 0.75rem;
+  background: var(--bg-tertiary);
+  color: var(--text-muted);
+  border-radius: 0.25rem;
+  text-transform: lowercase;
+}
+
+.tag.rust { background: var(--rust); color: white; }
+.tag.cpp { background: #00599C; color: white; }
+.tag.typescript { background: #3178C6; color: white; }
+.tag.python { background: #3776AB; color: white; }
+.tag.react { background: #61DAFB; color: #1a1d23; }
+
+.project-status {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.875rem;
+  color: var(--text-muted);
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--border);
+}
+
+.status-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--success);
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+
+/* About Section */
+.about-content {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr));
+  gap: 3rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.about-card {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border);
+  border-radius: 1rem;
+  padding: 2rem;
+}
+
+.about-card-title {
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.about-card-icon {
+  font-size: 1.5rem;
+}
+
+.skill-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+
+.skill-tag {
+  padding: 0.5rem 1rem;
+  background: var(--bg-tertiary);
+  border: 1px solid var(--border);
+  border-radius: 0.5rem;
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+}
+
+/* Footer */
+footer {
+  padding-block: 3rem;
+  text-align: center;
+  border-top: 1px solid var(--border);
+  margin-top: 5rem;
+}
+
+.social-links {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  margin-bottom: 2rem;
+}
+
+.social-link {
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0.75rem;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border);
+  color: var(--text-primary);
+  text-decoration: none;
+  transition: all 0.3s ease;
+  font-size: 1.25rem;
+}
+
+.social-link:hover {
+  background: var(--accent-electric);
+  color: var(--bg-primary);
+  border-color: var(--accent-electric);
+  transform: translateY(-4px);
+}
+
+footer p {
+  color: var(--text-muted);
+  font-size: 0.875rem;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .hero {
+    min-height: auto;
+    padding-block: 3rem 2rem;
+  }
+
+  .section {
+    padding-block: 3rem;
+  }
+
+  .section-header {
+    margin-bottom: 2rem;
+  }
+
+  .stats {
+    gap: 2rem;
+  }
+
+  .about-content {
+    gap: 1.5rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+</style>
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap">
+
+<!-- Hero Section -->
+<section class="hero">
+  <div class="hero-background">
+    <div class="grid-overlay"></div>
+  </div>
+
+  <div class="hero-content">
+    <div class="eyebrow">Software Engineer & Systems Builder</div>
+    <h1>Francis Chung</h1>
+    <p class="subtitle">
+      Building high-performance systems from scratch. Physics engines, databases,
+      real-time data platforms, and quantum computing tools.
+    </p>
+
+    <div class="cta-group">
+      <a href="#projects" class="btn btn-primary">
+        View Projects
+        <span>→</span>
+      </a>
+      <a href="https://github.com/francis-chung" target="_blank" class="btn btn-secondary">
+        <span>⚡</span>
+        GitHub
+      </a>
+    </div>
+
+    <div class="stats">
+      <div class="stat">
+        <span class="stat-value">15+</span>
+        <span class="stat-label">Projects</span>
+      </div>
+      <div class="stat">
+        <span class="stat-value">5</span>
+        <span class="stat-label">Languages</span>
+      </div>
+      <div class="stat">
+        <span class="stat-value">3</span>
+        <span class="stat-label">Live Demos</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Projects Section -->
+<section class="section" id="projects">
+  <div class="section-header">
+    <h2 class="section-title">Featured Work</h2>
+    <p class="section-subtitle">
+      A collection of systems programming, web applications, and experimental projects
+    </p>
+  </div>
+
+  <div class="filter-tabs">
+    <button class="filter-tab active" data-filter="all">all</button>
+    <button class="filter-tab" data-filter="systems">systems</button>
+    <button class="filter-tab" data-filter="physics">physics</button>
+    <button class="filter-tab" data-filter="web">web</button>
+    <button class="filter-tab" data-filter="quantum">quantum</button>
+  </div>
+
+  <div class="projects-grid">
+    <!-- KV Database -->
+    <article class="project-card" data-category="systems">
+      <div class="project-header">
+        <div class="project-icon">🗄️</div>
+        <div class="project-links">
+          <a href="https://github.com/francis-chung/kv-database" target="_blank" class="icon-link" title="View on GitHub">⚡</a>
+        </div>
+      </div>
+      <h3 class="project-title">KV-Database</h3>
+      <p class="project-description">
+        Lightweight in-memory key-value database written in Rust with Redis-like commands.
+        Features write-ahead logging, automatic snapshotting, custom skip list implementation,
+        and LRU caching. Includes interactive browser demo with TCP and HTTP API.
+      </p>
+      <div class="project-tags">
+        <span class="tag rust">rust</span>
+        <span class="tag">tokio</span>
+        <span class="tag">axum</span>
+        <span class="tag">wasm</span>
+      </div>
+      <div class="project-status">
+        <span class="status-dot"></span>
+        <span>Complete with live demo</span>
+      </div>
+    </article>
+
+    <!-- ephys -->
+    <article class="project-card" data-category="physics">
+      <div class="project-header">
+        <div class="project-icon">⚛️</div>
+        <div class="project-links">
+          <a href="https://asherhe.github.io/ephys/" target="_blank" class="icon-link" title="Live Demo">🌐</a>
+          <a href="https://github.com/asherhe/ephys" target="_blank" class="icon-link" title="View on GitHub">⚡</a>
+        </div>
+      </div>
+      <h3 class="project-title">ephys</h3>
+      <p class="project-description">
+        2D rigidbody physics engine in C++ inspired by Cyclone Physics. Features SDL3 + Dear ImGui
+        interface, builds natively and to WebAssembly. Includes BVH broadphase collision detection,
+        force generators, and interactive simulation controls.
+      </p>
+      <div class="project-tags">
+        <span class="tag cpp">c++</span>
+        <span class="tag">sdl3</span>
+        <span class="tag">imgui</span>
+        <span class="tag">wasm</span>
+        <span class="tag">cmake</span>
+      </div>
+      <div class="project-status">
+        <span class="status-dot"></span>
+        <span>Live demo available</span>
+      </div>
+    </article>
+
+    <!-- fysics -->
+    <article class="project-card" data-category="physics web">
+      <div class="project-header">
+        <div class="project-icon">🎯</div>
+        <div class="project-links">
+          <a href="https://github.com/asherhe/fysics" target="_blank" class="icon-link" title="View on GitHub">⚡</a>
+        </div>
+      </div>
+      <h3 class="project-title">fysics</h3>
+      <p class="project-description">
+        Simple 2D rigidbody physics engine built with TypeScript. Monorepo structure with the
+        engine library and a React + Vite demo site. Clean ESM/CJS builds with full type
+        declarations and modern tooling.
+      </p>
+      <div class="project-tags">
+        <span class="tag typescript">typescript</span>
+        <span class="tag react">react</span>
+        <span class="tag">vite</span>
+        <span class="tag">pnpm</span>
+      </div>
+      <div class="project-status">
+        <span class="status-dot"></span>
+        <span>Active development</span>
+      </div>
+    </article>
+
+    <!-- qlang -->
+    <article class="project-card" data-category="quantum systems">
+      <div class="project-header">
+        <div class="project-icon">🔬</div>
+        <div class="project-links">
+          <a href="https://github.com/francis-chung/qlang" target="_blank" class="icon-link" title="View on GitHub">⚡</a>
+        </div>
+      </div>
+      <h3 class="project-title">qlang</h3>
+      <p class="project-description">
+        Symbolic Boolean and unsigned-integer expression engine with quantum compilation.
+        Implements Grover search for satisfying assignments and QAOA for cost minimization
+        using local statevector simulation.
+      </p>
+      <div class="project-tags">
+        <span class="tag python">python</span>
+        <span class="tag">quantum</span>
+        <span class="tag">qaoa</span>
+        <span class="tag">grover</span>
+      </div>
+      <div class="project-status">
+        <span class="status-dot"></span>
+        <span>Experimental</span>
+      </div>
+    </article>
+
+    <!-- Omnibus -->
+    <article class="project-card" data-category="systems web">
+      <div class="project-header">
+        <div class="project-icon">📡</div>
+        <div class="project-links">
+          <a href="https://github.com/waterloo-rocketry/omnibus" target="_blank" class="icon-link" title="View on GitHub">⚡</a>
+        </div>
+      </div>
+      <h3 class="project-title">Omnibus</h3>
+      <p class="project-description">
+        Unified data bus for Waterloo Rocketry that manages connections between DAQ systems,
+        telemetry, and logging. Real-time data broadcasting over Wi-Fi for safe remote monitoring
+        during rocket tests and static fires.
+      </p>
+      <div class="project-tags">
+        <span class="tag python">python</span>
+        <span class="tag">iot</span>
+        <span class="tag">websockets</span>
+        <span class="tag">telemetry</span>
+      </div>
+      <div class="project-status">
+        <span class="status-dot"></span>
+        <span>Production use</span>
+      </div>
+    </article>
+
+    <!-- Omnibus DAQms -->
+    <article class="project-card" data-category="web">
+      <div class="project-header">
+        <div class="project-icon">📊</div>
+        <div class="project-links">
+          <a href="https://github.com/francis-chung/omnibus-daqms" target="_blank" class="icon-link" title="View on GitHub">⚡</a>
+        </div>
+      </div>
+      <h3 class="project-title">Omnibus DAQms</h3>
+      <p class="project-description">
+        Real-time data acquisition and monitoring dashboard with live WebSocket streaming.
+        Full-stack application with mock backend for testing and development of telemetry
+        visualization systems.
+      </p>
+      <div class="project-tags">
+        <span class="tag typescript">typescript</span>
+        <span class="tag react">react</span>
+        <span class="tag">websockets</span>
+        <span class="tag">node.js</span>
+      </div>
+      <div class="project-status">
+        <span class="status-dot"></span>
+        <span>Complete</span>
+      </div>
+    </article>
+
+    <!-- Elegancy Platform -->
+    <article class="project-card" data-category="web">
+      <div class="project-header">
+        <div class="project-icon">🏢</div>
+        <div class="project-links">
+          <a href="https://www.elegancytechnologies.com" target="_blank" class="icon-link" title="Live Site">🌐</a>
+        </div>
+      </div>
+      <h3 class="project-title">Elegancy Platform</h3>
+      <p class="project-description">
+        Company website and strategy research platform for Elegancy Technologies.
+        Working frontend prototype with dependency-free architecture. Clean, modern
+        design with integrated strategy tools.
+      </p>
+      <div class="project-tags">
+        <span class="tag typescript">typescript</span>
+        <span class="tag">vite</span>
+        <span class="tag">no-deps</span>
+      </div>
+      <div class="project-status">
+        <span class="status-dot"></span>
+        <span>Live prototype</span>
+      </div>
+    </article>
+
+    <!-- Planit -->
+    <article class="project-card" data-category="web">
+      <div class="project-header">
+        <div class="project-icon">✅</div>
+        <div class="project-links">
+          <a href="https://github.com/francis-chung/planit" target="_blank" class="icon-link" title="View on GitHub">⚡</a>
+        </div>
+      </div>
+      <h3 class="project-title">Planit</h3>
+      <p class="project-description">
+        Productivity-focused to-do list app with gamification. Create, update, and delete tasks
+        while earning experience points and leveling up. Clean, intuitive interface designed
+        for daily task management.
+      </p>
+      <div class="project-tags">
+        <span class="tag typescript">typescript</span>
+        <span class="tag">gamification</span>
+      </div>
+      <div class="project-status">
+        <span class="status-dot"></span>
+        <span>Complete</span>
+      </div>
+    </article>
+
+    <!-- Universe -->
+    <article class="project-card" data-category="systems">
+      <div class="project-header">
+        <div class="project-icon">🚀</div>
+        <div class="project-links">
+          <a href="https://github.com/waterloo-rocketry/universe" target="_blank" class="icon-link" title="View on GitHub">⚡</a>
+        </div>
+      </div>
+      <h3 class="project-title">Universe</h3>
+      <p class="project-description">
+        Waterloo Rocketry's software monorepo containing deployable applications and shared
+        libraries. Includes CAN message definitions via git submodules and comprehensive
+        Python-based tooling with uv package management.
+      </p>
+      <div class="project-tags">
+        <span class="tag python">python</span>
+        <span class="tag">monorepo</span>
+        <span class="tag">embedded</span>
+      </div>
+      <div class="project-status">
+        <span class="status-dot"></span>
+        <span>Active development</span>
+      </div>
+    </article>
+  </div>
+</section>
+
+<!-- About Section -->
+<section class="section" id="about">
+  <div class="section-header">
+    <h2 class="section-title">About Me</h2>
+    <p class="section-subtitle">
+      Building systems that matter, from the ground up
+    </p>
+  </div>
+
+  <div class="about-content">
+    <div class="about-card">
+      <h3 class="about-card-title">
+        <span class="about-card-icon">💻</span>
+        Technical Focus
+      </h3>
+      <p>
+        I specialize in systems programming and high-performance computing.
+        My work spans physics simulation engines, distributed systems, real-time
+        data platforms, and quantum computing applications.
+      </p>
+      <div class="skill-list">
+        <span class="skill-tag">Systems Programming</span>
+        <span class="skill-tag">Physics Engines</span>
+        <span class="skill-tag">Database Systems</span>
+        <span class="skill-tag">Real-time Systems</span>
+        <span class="skill-tag">Quantum Computing</span>
+      </div>
+    </div>
+
+    <div class="about-card">
+      <h3 class="about-card-title">
+        <span class="about-card-icon">🛠️</span>
+        Tech Stack
+      </h3>
+      <p>
+        Polyglot engineer comfortable across the stack. I choose tools based
+        on the problem domain, favoring performance and correctness for
+        systems work and productivity for application development.
+      </p>
+      <div class="skill-list">
+        <span class="skill-tag">Rust</span>
+        <span class="skill-tag">C/C++</span>
+        <span class="skill-tag">TypeScript</span>
+        <span class="skill-tag">Python</span>
+        <span class="skill-tag">React</span>
+        <span class="skill-tag">WebAssembly</span>
+      </div>
+    </div>
+
+    <div class="about-card">
+      <h3 class="about-card-title">
+        <span class="about-card-icon">🎯</span>
+        Interests
+      </h3>
+      <p>
+        Passionate about building educational tools that make complex systems
+        understandable. I create interactive demos and write detailed documentation
+        to help others learn from my work.
+      </p>
+      <div class="skill-list">
+        <span class="skill-tag">Interactive Demos</span>
+        <span class="skill-tag">Open Source</span>
+        <span class="skill-tag">Technical Writing</span>
+        <span class="skill-tag">Teaching</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer>
+  <div class="social-links">
+    <a href="https://github.com/francis-chung" target="_blank" class="social-link" title="GitHub">⚡</a>
+    <a href="mailto:francis.chung@example.com" class="social-link" title="Email">✉️</a>
+  </div>
+  <p>© 2026 Francis Chung. Built with passion for systems and craft.</p>
+</footer>
+
+<script>
+// Filter functionality
+document.querySelectorAll('.filter-tab').forEach(tab => {
+  tab.addEventListener('click', () => {
+    const filter = tab.dataset.filter;
+
+    // Update active state
+    document.querySelectorAll('.filter-tab').forEach(t => t.classList.remove('active'));
+    tab.classList.add('active');
+
+    // Filter projects
+    document.querySelectorAll('.project-card').forEach(card => {
+      const categories = card.dataset.category.split(' ');
+      if (filter === 'all' || categories.includes(filter)) {
+        card.style.display = 'flex';
+      } else {
+        card.style.display = 'none';
+      }
+    });
+  });
+});
+
+// Smooth scroll for anchor links
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+  anchor.addEventListener('click', function (e) {
+    const href = this.getAttribute('href');
+    if (href === '#') return;
+
+    e.preventDefault();
+    const target = document.querySelector(href);
+    if (target) {
+      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  });
+});
+
+// Stats animation on scroll
+const animateStats = () => {
+  const stats = document.querySelectorAll('.stat-value');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const target = entry.target;
+        const finalValue = parseInt(target.textContent.replace('+', ''));
+        let current = 0;
+        const increment = finalValue / 30;
+        const timer = setInterval(() => {
+          current += increment;
+          if (current >= finalValue) {
+            target.textContent = target.textContent.includes('+') ? finalValue + '+' : finalValue;
+            clearInterval(timer);
+          } else {
+            target.textContent = Math.floor(current);
+          }
+        }, 50);
+        observer.unobserve(target);
+      }
+    });
+  }, { threshold: 0.5 });
+
+  stats.forEach(stat => observer.observe(stat));
+};
+
+if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+  animateStats();
+}
+</script>
